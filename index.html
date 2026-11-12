@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfólio Vitor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<style>
+/* Layout: coluna única, alinhada à esquerda, só cinzas neutros, linhas finas e bastante espaço em branco. */
+:root {
+  --bg: #F4F4F3;
+  --fg: #161616;
+  --muted: #6A6A68;
+  --line: #DADAD8;
+  --strong: #3C3C3A;
+  --chip: #E9E9E7;
+
+  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121212;
+    --fg: #EDEDEC;
+    --muted: #9A9A98;
+    --line: #2B2B2A;
+    --strong: #CFCFCD;
+    --chip: #1C1C1B;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121212;
+  --fg: #EDEDEC;
+  --muted: #9A9A98;
+  --line: #2B2B2A;
+  --strong: #CFCFCD;
+  --chip: #1C1C1B;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--bg);
+  z-index: 10;
+}
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  width: 100%;
+  max-width: 880px;
+  margin-inline: auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Cabeçalho */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 9;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px 24px;
+  padding-block: 14px;
+}
+.brand { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
+.nav { display: flex; align-items: center; gap: 22px; }
+.nav a { font-size: 0.9rem; color: var(--muted); transition: color .15s; }
+.nav a:hover { color: var(--fg); }
+.theme-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; padding: 0;
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 50%;
+  cursor: pointer; transition: color .15s, border-color .15s;
+}
+.theme-btn:hover { color: var(--fg); border-color: var(--muted); }
+.theme-btn svg { width: 17px; height: 17px; }
+
+/* Seções */
+section { padding-block: 72px; border-bottom: 1px solid var(--line); }
+section:last-of-type { border-bottom: 0; }
+.eyebrow { font-size: 0.82rem; font-weight: 500; color: var(--muted); margin: 0 0 20px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+
+/* Hero */
+.hero { padding-top: 88px; padding-bottom: 80px; }
+.hero h1 { font-size: clamp(2.6rem, 8.5vw, 5rem); line-height: 1.03; font-weight: 700; }
+.hero h1 em { font-style: normal; color: var(--muted); }
+.lead { max-width: 52ch; margin: 28px 0 0; font-size: clamp(1.05rem, 2.4vw, 1.25rem); color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.btn {
+  display: inline-flex; align-items: center;
+  padding: 11px 22px; border-radius: 999px;
+  font-weight: 500; font-size: 0.95rem;
+  border: 1px solid var(--line);
+  transition: background .15s, border-color .15s, color .15s;
+}
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.primary:hover { background: var(--strong); border-color: var(--strong); }
+.btn.ghost:hover { border-color: var(--fg); }
+
+/* Sobre */
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 20px 56px; }
+.about h2, .section-head h2 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 600; line-height: 1.2; }
+.about p { margin: 0 0 16px; color: var(--muted); max-width: 60ch; }
+.about p:first-child { color: var(--fg); font-size: 1.1rem; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px 32px; margin: 32px 0 0; padding: 0; list-style: none; }
+.facts li { min-width: 0; }
+.facts b { display: block; font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom: 2px; }
+
+/* Projetos */
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; margin-bottom: 36px; }
+.section-head .eyebrow { margin: 0; }
+.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.project { border-bottom: 1px solid var(--line); }
+.project a {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  gap: 8px 24px;
+  align-items: start;
+  padding: 28px 0;
+}
+.project .year { font-size: 0.85rem; color: var(--muted); padding-top: 6px; font-variant-numeric: tabular-nums; }
+.project h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 600; line-height: 1.25; }
+.project p { margin: 8px 0 0; color: var(--muted); max-width: 58ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
+.tags li { font-size: 0.75rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--chip); color: var(--muted); }
+.arrow { padding-top: 6px; color: var(--muted); transition: transform .2s, color .2s; }
+.arrow svg { width: 20px; height: 20px; display: block; }
+.project a:hover .arrow { color: var(--fg); transform: translate(3px, -3px); }
+.project a:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+
+/* Habilidades */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 40px 32px; }
+.skills h3 { font-size: 1rem; font-weight: 600; margin-bottom: 14px; }
+.skills ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.skills li { color: var(--muted); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+
+/* Contato */
+.contact h2 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.08; font-weight: 700; max-width: 16ch; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 32px; }
+.mail { font-size: clamp(1rem, 3.6vw, 1.2rem); font-weight: 500; overflow-wrap: anywhere; user-select: all; }
+.copy {
+  font: inherit; font-size: 0.85rem; padding: 6px 14px; cursor: pointer;
+  background: transparent; color: var(--fg);
+  border: 1px solid var(--line); border-radius: 999px; transition: border-color .15s;
+}
+.copy:hover { border-color: var(--fg); }
+.links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 28px; }
+.links a { color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color .15s, border-color .15s; }
+.links a:hover { color: var(--fg); border-color: var(--fg); }
+
+footer { padding-block: 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+footer a:hover { color: var(--fg); }
+
+/* Telas pequenas */
+@media (max-width: 680px) {
+  section { padding-block: 56px; }
+  .hero { padding-top: 56px; padding-bottom: 56px; }
+  .about { grid-template-columns: minmax(0, 1fr); }
+  .project a { grid-template-columns: minmax(0, 1fr) auto; }
+  .project .year { grid-column: 1 / -1; padding-top: 0; }
+  .nav { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
+</style>
+
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="#inicio">Vitor</a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#sobre">Sobre</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#contato">Contato</a>
+      <button class="theme-btn" id="theme" type="button" aria-label="Alternar entre tema claro e escuro">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="inicio">
+    <div class="wrap">
+      <p class="eyebrow">Analista de dados · Brasil</p>
+      <h1>Olá, eu sou o Vitor. Transformo dados em <em>decisões claras.</em></h1>
+      <p class="lead">Trabalho com análise de dados, painéis interativos e automação. Gosto de explicar números de um jeito que qualquer pessoa entenda.</p>
+      <div class="actions">
+        <a class="btn primary" href="#projetos">Ver projetos</a>
+        <a class="btn ghost" href="#contato">Entrar em contato</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="wrap about">
+      <div>
+        <p class="eyebrow">Sobre</p>
+        <h2>Dados que fazem sentido.</h2>
+      </div>
+      <div>
+        <p>Sou apaixonado por transformar planilhas confusas em painéis que mostram o que realmente importa.</p>
+        <p>Meu dia a dia mistura Power BI, Python e Excel. Estou sempre aprendendo algo novo e aplicando em projetos reais, do levantamento dos dados até a entrega do resultado.</p>
+        <ul class="facts">
+          <li><b>Local</b>Brasil</li>
+          <li><b>Foco</b>Análise e visualização</li>
+          <li><b>Idiomas</b>Português, Inglês</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projetos selecionados</h2>
+        <p class="eyebrow">3 projetos</p>
+      </div>
+      <ul class="projects">
+        <li class="project">
+          <a href="https://github.com/seu-usuario" target="_blank" rel="noopener">
+            <span class="year">2026</span>
+            <div>
+              <h3>Catálogo interativo de expositores</h3>
+              <p>Painel para consultar expositores de uma feira por segmento, estande e produtos, com filtros simples para o visitante.</p>
+              <ul class="tags"><li>Power BI</li><li>DAX</li><li>Design de painel</li></ul>
+            </div>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
+        </li>
+        <li class="project">
+          <a href="https://github.com/seu-usuario" target="_blank" rel="noopener">
+            <span class="year">2026</span>
+            <div>
+              <h3>Análise de consumo de energia</h3>
+              <p>Leitura de faturas mensais, cálculo de médias e gráficos que mostram em quais meses o consumo mais cresce.</p>
+              <ul class="tags"><li>Python</li><li>pandas</li><li>Gráficos</li></ul>
+            </div>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
+        </li>
+        <li class="project">
+          <a href="https://github.com/seu-usuario" target="_blank" rel="noopener">
+            <span class="year">2025</span>
+            <div>
+              <h3>Automação de relatórios</h3>
+              <p>Script que junta várias planilhas, limpa os dados e gera o relatório semanal sem trabalho manual.</p>
+              <ul class="tags"><li>Python</li><li>Excel</li><li>Automação</li></ul>
+            </div>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="habilidades">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Habilidades</h2>
+      </div>
+      <div class="skills">
+        <div>
+          <h3>Análise e visualização</h3>
+          <ul><li>Power BI</li><li>DAX</li><li>Excel avançado</li><li>Storytelling com dados</li></ul>
+        </div>
+        <div>
+          <h3>Programação</h3>
+          <ul><li>Python</li><li>pandas</li><li>SQL básico</li><li>HTML e CSS</li></ul>
+        </div>
+        <div>
+          <h3>Ferramentas</h3>
+          <ul><li>Git e GitHub</li><li>Google Sheets</li><li>Notion</li><li>Claude</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contato">
+    <div class="wrap">
+      <p class="eyebrow">Contato</p>
+      <h2>Vamos conversar sobre o seu projeto?</h2>
+      <div class="mail-row">
+        <span class="mail" id="mail">seu@email.com</span>
+        <button class="copy" id="copy" type="button">Copiar e-mail</button>
+      </div>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/seu-usuario" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/seu-usuario" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Vitor</span>
+    <a href="#inicio">Voltar ao topo ↑</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var btn = document.getElementById("theme");
+
+  try {
+    var saved = localStorage.getItem("portfolio-theme");
+    if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+  } catch (e) {}
+
+  btn.addEventListener("click", function () {
+    var current = root.getAttribute("data-theme");
+    if (!current) current = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("portfolio-theme", next); } catch (e) {}
+  });
+
+  var copyBtn = document.getElementById("copy");
+  var mail = document.getElementById("mail");
+  copyBtn.addEventListener("click", function () {
+    var text = mail.textContent.trim();
+    function done() {
+      copyBtn.textContent = "Copiado";
+      setTimeout(function () { copyBtn.textContent = "Copiar e-mail"; }, 1800);
+    }
+    function fallback() {
+      var range = document.createRange();
+      range.selectNodeContents(mail);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      copyBtn.textContent = "Selecionado";
+      setTimeout(function () { copyBtn.textContent = "Copiar e-mail"; }, 1800);
+    }
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
