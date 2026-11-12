@@ -5,50 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portfólio Vitor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap">
 <style>
-/* Layout: coluna única, alinhada à esquerda, só cinzas neutros, linhas finas e bastante espaço em branco. */
+/* Layout: grade crua com bordas de 3px, nome gigante em Bebas Neue, texto na mesma fonte, só cinzas; hover inverte as cores. */
 :root {
-  --bg: #F4F4F3;
-  --fg: #161616;
-  --muted: #6A6A68;
-  --line: #DADAD8;
-  --strong: #3C3C3A;
-  --chip: #E9E9E7;
+  --bg: #D9D9D7;
+  --fg: #444442;
+  --muted: #5A5A57;
+  --panel: #E5E5E3;
+  --bw: 3px;
 
-  --font-display: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Bebas Neue", Impact, "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Bebas Neue", Impact, "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #121212;
-    --fg: #EDEDEC;
-    --muted: #9A9A98;
-    --line: #2B2B2A;
-    --strong: #CFCFCD;
-    --chip: #1C1C1B;
+    --bg: #333332;
+    --fg: #E6E6E4;
+    --muted: #B4B4B1;
+    --panel: #3D3D3C;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #121212;
-  --fg: #EDEDEC;
-  --muted: #9A9A98;
-  --line: #2B2B2A;
-  --strong: #CFCFCD;
-  --chip: #1C1C1B;
+  --bg: #333332;
+  --fg: #E6E6E4;
+  --muted: #B4B4B1;
+  --panel: #3D3D3C;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 body { margin: 0; }
 img { max-width: 100%; }
-html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -60,12 +55,13 @@ body::before {
   background: var(--bg);
   z-index: 10;
 }
+::selection { background: var(--fg); color: var(--bg); }
 a { color: inherit; text-decoration: none; }
-:focus-visible { outline: 2px solid var(--fg); outline-offset: 3px; border-radius: 4px; }
+:focus-visible { outline: var(--bw) solid var(--fg); outline-offset: 2px; }
 
 .wrap {
   width: 100%;
-  max-width: 880px;
+  max-width: 1040px;
   margin-inline: auto;
   padding-left: max(20px, env(safe-area-inset-left, 0px));
   padding-right: max(20px, env(safe-area-inset-right, 0px));
@@ -77,116 +73,139 @@ a { color: inherit; text-decoration: none; }
   top: env(safe-area-inset-top, 0px);
   z-index: 9;
   background: var(--bg);
-  border-bottom: 1px solid var(--line);
+  border-bottom: var(--bw) solid var(--fg);
 }
-.bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 6px 24px;
-  padding-block: 14px;
+.bar { display: flex; flex-wrap: wrap; align-items: stretch; justify-content: space-between; }
+.brand { display: flex; align-items: center; padding-block: 12px; font-family: var(--font-display); font-weight: 400; font-size: 1.7rem; line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; }
+.nav { display: flex; align-items: stretch; }
+.nav a, .theme-btn {
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px 16px;
+  font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  border: 0; border-left: var(--bw) solid var(--fg);
+  background: transparent; color: var(--fg);
+  transition: background .1s, color .1s;
 }
-.brand { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
-.nav { display: flex; align-items: center; gap: 22px; }
-.nav a { font-size: 0.9rem; color: var(--muted); transition: color .15s; }
-.nav a:hover { color: var(--fg); }
-.theme-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; padding: 0;
-  background: transparent; color: var(--muted);
-  border: 1px solid var(--line); border-radius: 50%;
-  cursor: pointer; transition: color .15s, border-color .15s;
-}
-.theme-btn:hover { color: var(--fg); border-color: var(--muted); }
+.nav a:hover, .theme-btn:hover { background: var(--fg); color: var(--bg); }
+.theme-btn { cursor: pointer; border-radius: 0; }
 .theme-btn svg { width: 17px; height: 17px; }
 
 /* Seções */
-section { padding-block: 72px; border-bottom: 1px solid var(--line); }
-section:last-of-type { border-bottom: 0; }
-.eyebrow { font-size: 0.82rem; font-weight: 500; color: var(--muted); margin: 0 0 20px; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.02em; }
+section { border-bottom: var(--bw) solid var(--fg); padding-block: 64px; }
+.label {
+  display: inline-block;
+  margin: 0 0 24px;
+  padding: 3px 10px;
+  background: var(--fg); color: var(--bg);
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; font-synthesis: none; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h2 { font-size: clamp(2.6rem, 7.4vw, 4.6rem); line-height: 0.95; letter-spacing: 0.01em; }
 
 /* Hero */
-.hero { padding-top: 88px; padding-bottom: 80px; }
-.hero h1 { font-size: clamp(2.6rem, 8.5vw, 5rem); line-height: 1.03; font-weight: 700; }
-.hero h1 em { font-style: normal; color: var(--muted); }
-.lead { max-width: 52ch; margin: 28px 0 0; font-size: clamp(1.05rem, 2.4vw, 1.25rem); color: var(--muted); }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.hero { padding-block: 40px 0; }
+.hero h1 { font-size: clamp(6rem, 44vw, 26rem); line-height: 0.82; letter-spacing: 0.01em; margin-left: -0.02em; }
+.hero-grid { border-top: var(--bw) solid var(--fg); margin-top: 32px; padding-block: 28px 36px; }
+.lead { margin: 0; max-width: 56ch; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .btn {
   display: inline-flex; align-items: center;
-  padding: 11px 22px; border-radius: 999px;
-  font-weight: 500; font-size: 0.95rem;
-  border: 1px solid var(--line);
-  transition: background .15s, border-color .15s, color .15s;
+  padding: 11px 18px;
+  font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase;
+  border: var(--bw) solid var(--fg);
+  transition: background .1s, color .1s;
 }
-.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.btn.primary:hover { background: var(--strong); border-color: var(--strong); }
-.btn.ghost:hover { border-color: var(--fg); }
+.btn.primary { background: var(--fg); color: var(--bg); }
+.btn.primary:hover, .btn.ghost:hover { background: var(--bg); color: var(--fg); }
+.btn.primary:hover { box-shadow: inset 0 0 0 0 transparent; }
+.btn.ghost:hover { background: var(--fg); color: var(--bg); }
+.btn.primary:hover { background: var(--panel); }
 
 /* Sobre */
-.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 20px 56px; }
-.about h2, .section-head h2 { font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 600; line-height: 1.2; }
-.about p { margin: 0 0 16px; color: var(--muted); max-width: 60ch; }
-.about p:first-child { color: var(--fg); font-size: 1.1rem; }
-.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px 32px; margin: 32px 0 0; padding: 0; list-style: none; }
-.facts li { min-width: 0; }
-.facts b { display: block; font-size: 0.8rem; font-weight: 500; color: var(--muted); margin-bottom: 2px; }
+.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 24px 56px; }
+.about p { margin: 0 0 16px; color: var(--muted); max-width: 62ch; }
+.about p:first-child { color: var(--fg); font-size: 1.1rem; font-weight: 500; }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 32px 0 0; padding: 0; list-style: none; border: var(--bw) solid var(--fg); background: var(--fg); gap: var(--bw); }
+.facts li { background: var(--panel); padding: 12px 14px; min-width: 0; overflow-wrap: anywhere; }
+.facts b { display: block; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
 
 /* Projetos */
-.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; margin-bottom: 36px; }
-.section-head .eyebrow { margin: 0; }
-.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.project { border-bottom: 1px solid var(--line); }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; margin-bottom: 32px; }
+.section-head .label { margin: 0; }
+.projects { list-style: none; margin: 0; padding: 0; border-top: var(--bw) solid var(--fg); }
+.project { border-bottom: var(--bw) solid var(--fg); }
 .project a {
   display: grid;
-  grid-template-columns: 72px minmax(0, 1fr) auto;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
   gap: 8px 24px;
   align-items: start;
-  padding: 28px 0;
+  padding: 26px 16px;
+  transition: background .1s, color .1s;
 }
-.project .year { font-size: 0.85rem; color: var(--muted); padding-top: 6px; font-variant-numeric: tabular-nums; }
-.project h3 { font-size: clamp(1.2rem, 3vw, 1.5rem); font-weight: 600; line-height: 1.25; }
-.project p { margin: 8px 0 0; color: var(--muted); max-width: 58ch; }
+.project .year { font-weight: 600; font-size: 0.85rem; padding-top: 4px; font-variant-numeric: tabular-nums; }
+.project h3 { font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1; letter-spacing: 0.02em; }
+.project p { margin: 8px 0 0; color: var(--muted); max-width: 58ch; transition: color .1s; }
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; padding: 0; list-style: none; }
-.tags li { font-size: 0.75rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; background: var(--chip); color: var(--muted); }
-.arrow { padding-top: 6px; color: var(--muted); transition: transform .2s, color .2s; }
-.arrow svg { width: 20px; height: 20px; display: block; }
-.project a:hover .arrow { color: var(--fg); transform: translate(3px, -3px); }
-.project a:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.tags li { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border: 2px solid currentColor; }
+.arrow svg { width: 26px; height: 26px; display: block; }
+.project a:hover { background: var(--fg); color: var(--bg); }
+.project a:hover p { color: var(--bg); opacity: .8; }
 
 /* Habilidades */
-.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 40px 32px; }
-.skills h3 { font-size: 1rem; font-weight: 600; margin-bottom: 14px; }
-.skills ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.skills li { color: var(--muted); padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--bw); background: var(--fg); border: var(--bw) solid var(--fg); }
+.skills > div { background: var(--panel); padding: 22px 20px; min-width: 0; }
+.skills h3 { font-size: 1.6rem; line-height: 1; letter-spacing: 0.02em; margin-bottom: 16px; }
+.skills ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.skills li { padding-left: 1.4em; position: relative; }
+.skills li::before { content: "+"; position: absolute; left: 0; font-weight: 600; }
 
 /* Contato */
-.contact h2 { font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.08; font-weight: 700; max-width: 16ch; }
-.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 32px; }
-.mail { font-size: clamp(1rem, 3.6vw, 1.2rem); font-weight: 500; overflow-wrap: anywhere; user-select: all; }
+.contact h2 { font-size: clamp(3rem, 10vw, 6.4rem); max-width: 9em; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: stretch; margin-top: 36px; border: var(--bw) solid var(--fg); background: var(--panel); }
+.mail { flex: 1 1 260px; min-width: 0; padding: 14px 18px; font-weight: 600; font-size: clamp(0.95rem, 3.4vw, 1.15rem); overflow-wrap: anywhere; user-select: all; }
 .copy {
-  font: inherit; font-size: 0.85rem; padding: 6px 14px; cursor: pointer;
+  font-family: var(--font-body); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 14px 18px; cursor: pointer;
   background: transparent; color: var(--fg);
-  border: 1px solid var(--line); border-radius: 999px; transition: border-color .15s;
+  border: 0; border-left: var(--bw) solid var(--fg); border-radius: 0;
+  transition: background .1s, color .1s;
 }
-.copy:hover { border-color: var(--fg); }
-.links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 28px; }
-.links a { color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 2px; transition: color .15s, border-color .15s; }
-.links a:hover { color: var(--fg); border-color: var(--fg); }
+.copy:hover { background: var(--fg); color: var(--bg); }
+.links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 
-footer { padding-block: 32px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+footer { padding-block: 20px; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
 footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-footer a:hover { color: var(--fg); }
+footer a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+
+/* Bebas Neue em todo o site: corpo maior e com espaçamento, sem negrito falso */
+body { font-size: 1.25rem; line-height: 1.45; letter-spacing: 0.03em; font-synthesis: none; }
+.about p:first-child { font-size: 1.55rem; }
+.label { font-size: 1.05rem; letter-spacing: 0.08em; }
+.nav a, .theme-btn { font-size: 1.05rem; letter-spacing: 0.08em; }
+.btn, .copy { font-size: 1.1rem; letter-spacing: 0.08em; }
+.tags li { font-size: 1rem; letter-spacing: 0.06em; }
+.facts b { font-size: 1rem; letter-spacing: 0.08em; }
+.project .year { font-size: 1.2rem; }
+.mail { font-size: clamp(1.3rem, 4.6vw, 1.7rem); letter-spacing: 0.04em; }
+footer { font-size: 1.05rem; letter-spacing: 0.08em; }
 
 /* Telas pequenas */
-@media (max-width: 680px) {
-  section { padding-block: 56px; }
-  .hero { padding-top: 56px; padding-bottom: 56px; }
+@media (max-width: 760px) {
   .about { grid-template-columns: minmax(0, 1fr); }
-  .project a { grid-template-columns: minmax(0, 1fr) auto; }
+  .skills { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 680px) {
+  section { padding-block: 48px; }
+  .bar { flex-direction: column; }
+  .brand { padding-block: 10px; }
+  .nav { border-top: var(--bw) solid var(--fg); margin-inline: calc(-1 * max(20px, env(safe-area-inset-left, 0px))) calc(-1 * max(20px, env(safe-area-inset-right, 0px))); }
+  .nav a { flex: 1 1 auto; padding: 11px 6px; font-size: 0.95rem; letter-spacing: 0.04em; }
+  .nav a:first-child { border-left: 0; }
+  .theme-btn { padding: 11px 14px; }
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .project a { grid-template-columns: minmax(0, 1fr) auto; padding-inline: 12px; }
   .project .year { grid-column: 1 / -1; padding-top: 0; }
-  .nav { gap: 16px; }
+  .copy { flex: 1 1 100%; border-left: 0; border-top: var(--bw) solid var(--fg); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -205,7 +224,7 @@ footer a:hover { color: var(--fg); }
       <a href="#habilidades">Habilidades</a>
       <a href="#contato">Contato</a>
       <button class="theme-btn" id="theme" type="button" aria-label="Alternar entre tema claro e escuro">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17"/><path d="M12 3.5v17h8.5v-17z" fill="currentColor"/></svg>
       </button>
     </nav>
   </div>
@@ -214,12 +233,16 @@ footer a:hover { color: var(--fg); }
 <main>
   <section class="hero" id="inicio">
     <div class="wrap">
-      <p class="eyebrow">Analista de dados · Brasil</p>
-      <h1>Olá, eu sou o Vitor. Transformo dados em <em>decisões claras.</em></h1>
-      <p class="lead">Trabalho com análise de dados, painéis interativos e automação. Gosto de explicar números de um jeito que qualquer pessoa entenda.</p>
-      <div class="actions">
-        <a class="btn primary" href="#projetos">Ver projetos</a>
-        <a class="btn ghost" href="#contato">Entrar em contato</a>
+      <p class="label">Engenheiro de software / Brasil</p>
+      <h1>Vitor</h1>
+      <div class="hero-grid">
+        <div>
+          <p class="lead">Trabalho com análise de dados, painéis interativos e automação. Gosto de explicar números de um jeito que qualquer pessoa entenda.</p>
+          <div class="actions">
+            <a class="btn primary" href="#projetos">Ver projetos</a>
+            <a class="btn ghost" href="#contato">Contato</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -227,7 +250,7 @@ footer a:hover { color: var(--fg); }
   <section id="sobre">
     <div class="wrap about">
       <div>
-        <p class="eyebrow">Sobre</p>
+        <p class="label">Sobre</p>
         <h2>Dados que fazem sentido.</h2>
       </div>
       <div>
@@ -245,8 +268,8 @@ footer a:hover { color: var(--fg); }
   <section id="projetos">
     <div class="wrap">
       <div class="section-head">
-        <h2>Projetos selecionados</h2>
-        <p class="eyebrow">3 projetos</p>
+        <h2>Projetos</h2>
+        <p class="label">3 selecionados</p>
       </div>
       <ul class="projects">
         <li class="project">
@@ -257,7 +280,7 @@ footer a:hover { color: var(--fg); }
               <p>Painel para consultar expositores de uma feira por segmento, estande e produtos, com filtros simples para o visitante.</p>
               <ul class="tags"><li>Power BI</li><li>DAX</li><li>Design de painel</li></ul>
             </div>
-            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 18 18 6"/><path d="M8 6h10v10"/></svg></span>
           </a>
         </li>
         <li class="project">
@@ -268,7 +291,7 @@ footer a:hover { color: var(--fg); }
               <p>Leitura de faturas mensais, cálculo de médias e gráficos que mostram em quais meses o consumo mais cresce.</p>
               <ul class="tags"><li>Python</li><li>pandas</li><li>Gráficos</li></ul>
             </div>
-            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 18 18 6"/><path d="M8 6h10v10"/></svg></span>
           </a>
         </li>
         <li class="project">
@@ -279,7 +302,7 @@ footer a:hover { color: var(--fg); }
               <p>Script que junta várias planilhas, limpa os dados e gera o relatório semanal sem trabalho manual.</p>
               <ul class="tags"><li>Python</li><li>Excel</li><li>Automação</li></ul>
             </div>
-            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg></span>
+            <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M6 18 18 6"/><path d="M8 6h10v10"/></svg></span>
           </a>
         </li>
       </ul>
@@ -310,15 +333,15 @@ footer a:hover { color: var(--fg); }
 
   <section class="contact" id="contato">
     <div class="wrap">
-      <p class="eyebrow">Contato</p>
+      <p class="label">Contato</p>
       <h2>Vamos conversar sobre o seu projeto?</h2>
       <div class="mail-row">
         <span class="mail" id="mail">seu@email.com</span>
         <button class="copy" id="copy" type="button">Copiar e-mail</button>
       </div>
       <div class="links">
-        <a href="https://www.linkedin.com/in/seu-usuario" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="https://github.com/seu-usuario" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/seu-usuario" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/seu-usuario" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </section>
